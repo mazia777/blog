@@ -13,11 +13,17 @@ class Commentaire extends Model
         'id',
         'title',
         'message',
-        'id user',
-        'id post',
-
-
+        'id_user',
+        'id_post',
 
 ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }

@@ -1,36 +1,36 @@
+{{-- resources/views/layouts/app.blade.php --}}
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title ?? 'Mon Blog' }}</title>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="bg-gray-100 text-gray-900">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    {{-- HEADER --}}
+    <header class="bg-white shadow-md">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600">Mon Blog</h1>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <nav class="flex gap-4">
+                <a href="{{ route('posts.index') }}" class="text-gray-700 hover:text-blue-500">Accueil</a>
+                <a href="{{ route('posts.create') }}" class="text-gray-700 hover:text-blue-500">Créer un post</a>
+            </nav>
         </div>
-    </body>
+    </header>
+
+    {{-- CONTENU DE CHAQUE PAGE --}}
+    <main class="max-w-5xl mx-auto px-4 py-8">
+        {{ $slot }}
+    </main>
+
+    {{-- FOOTER --}}
+    <footer class="bg-white text-center py-4 mt-10 border-t">
+        <p class="text-gray-600 text-sm">© {{ date('Y') }} - Mon Blog</p>
+    </footer>
+
+</body>
 </html>
